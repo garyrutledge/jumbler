@@ -1,0 +1,59 @@
+<br><br><br>
+<div class="row">
+  <div class="col-xs-4">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Jumble Puzzles</h3>
+      </div>
+      <div class="panel-body">
+
+        <ul class="list-group">
+          <% 10.times do |index| %>
+              <% colour_switch = (index.odd? ? "info" : "success") %>
+              <script>
+                  function solve<%= index %>() {
+                      document.getElementById("puzzle<%= index %>").innerHTML = "<b> <%= @puzzle_hash.values[index] %> </b>";
+                  }
+
+                  function add_to_notes<%= index %>() {
+                      $('#notes').val("<%= @puzzle_hash.keys[index]  %>");
+                  }
+
+
+              </script>
+
+                <li class="list-group-item list-group-item-<%= colour_switch %>">
+                  <div class="btn-group-xs">
+                  <em> <%= index + 1 %>.</em><span id="puzzle<%= index %>"> <%= @puzzle_hash.keys[index] %> </span>
+                    <button type="button" id='add_to_notes<%= index %>' class="btn pull-right" onClick="add_to_notes<%= index %>()">Notes<span class="glyphicon glyphicon-chevron-right"></span></button>
+                    <button type="button" id='solve<%= index %>' class="btn pull-right" onClick="solve<%= index %>()">solve</button>
+                  </div>
+                </li>
+
+          <% end %>
+        </ul>
+      </div>
+      <div class="btn-group-sm">
+
+        <button type="button" class="btn btn-default" onClick="history.go(0)">Restart</button>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Notes</h3>
+      </div>
+
+      <div class="form-group">
+        <label for="comment"></label>
+        <textarea class="form-control" id="notes" rows="20" id="comment"></textarea>
+      </div>
+
+      <div class="panel-body">
+      </div>
+    </div>
+  </div>
+</div>
